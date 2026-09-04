@@ -3,186 +3,616 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golden Stone — Design System v1.0</title>
-  <link rel="stylesheet" href="../src/styles/reset.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <title>Golden Stone QLD — Design System v2.1</title>
+  <meta name="description" content="Design system reference for goldenstoneqld.com.au: tokens, measured contrast, typography, buttons, section heads, stat row, IFL rail, cards, forms and the hero animation.">
+  <link rel="canonical" href="https://goldenstoneqld.com.au/docs/design-system.html">
+  <meta name="theme-color" content="#111111">
+  <meta name="robots" content="noindex">
+
+  <!-- Icons: GS monogram -->
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../public/images/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../public/images/brand/apple-touch-icon.png">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://goldenstoneqld.com.au/docs/design-system.html">
+  <meta property="og:site_name"   content="Golden Stone QLD">
+  <meta property="og:locale"      content="en_AU">
+  <meta property="og:title"       content="Golden Stone QLD — Design System">
+  <meta property="og:description" content="Design system reference for goldenstoneqld.com.au: tokens, measured contrast, typography, buttons, section heads, stat row, IFL rail, cards, forms and the hero animation.">
+  <meta property="og:image"       content="https://goldenstoneqld.com.au/public/images/og-home.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Golden Stone QLD — Design System">
+  <meta name="twitter:description" content="Design system reference for goldenstoneqld.com.au: tokens, measured contrast, typography, buttons, section heads, stat row, IFL rail, cards, forms and the hero animation.">
+  <meta name="twitter:image"       content="https://goldenstoneqld.com.au/public/images/og-home.jpg">
+
+  <!-- Fonts: one request, in parallel with the stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap">
+
+  <!-- Design system -->
   <link rel="stylesheet" href="../src/styles/tokens.css">
+  <link rel="stylesheet" href="../src/styles/reset.css">
   <link rel="stylesheet" href="../src/styles/base.css">
   <link rel="stylesheet" href="../src/styles/components.css">
-  <style>
-    /* Demo page only — not part of the design system */
-    body { padding: 2rem; max-width: 1200px; margin: 0 auto; }
-    .demo-section { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-border, #e0d9cc); }
-    .demo-title { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-secondary, #5C5C62); margin-bottom: 1.5rem; }
-    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
-    .swatch { border-radius: var(--radius-md, 6px); overflow: hidden; border: 1px solid var(--color-border, #e0d9cc); }
-    .swatch-color { height: 100px; }
-    .swatch-info { padding: 0.75rem; background: #fff; }
-    .swatch-name { font-weight: 600; font-size: 0.9rem; }
-    .swatch-hex { font-family: monospace; font-size: 0.8rem; color: var(--color-text-secondary, #5C5C62); margin-top: 0.25rem; }
-    .type-row { padding: 0.75rem 0; border-bottom: 1px dashed var(--color-border, #e0d9cc); }
-    .type-label { font-family: monospace; font-size: 0.75rem; color: var(--color-text-secondary, #5C5C62); margin-bottom: 0.5rem; }
-    .button-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .form-demo { max-width: 480px; }
-    .form-demo > * + * { margin-top: 1rem; }
-    .spacing-row { display: flex; align-items: center; gap: 1rem; padding: 0.5rem 0; }
-    .spacing-bar { background: var(--color-primary, #B8922A); height: 16px; }
-    .spacing-label { font-family: monospace; font-size: 0.85rem; min-width: 120px; }
-  </style>
+  <link rel="stylesheet" href="../src/styles/components/hero-animation.css">
+  <link rel="stylesheet" href="../src/styles/pages/design-system.css">
 </head>
 <body>
 
-  <header style="margin-bottom: 4rem;">
-    <h1>Golden Stone — Design System</h1>
-    <p style="color: var(--color-text-secondary, #5C5C62); margin-top: 0.5rem;">
-      Visual reference for tokens and components. Version 1.0 · Based on Brand Book v2.0.
-    </p>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- =====================================================================
+       SITE HEADER
+       ===================================================================== -->
+  <header class="site-header site-header--solid" id="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__inner container">
+        <a href="../index.html" class="nav__logo" aria-label="Golden Stone QLD — home">
+          <img src="../public/images/brand/gs-monogram-inverted.svg" alt="" width="50" height="30">
+          <span class="nav__logo-text">Golden Stone</span>
+        </a>
+
+        <ul class="nav__links" role="list">
+          <li><a href="../index.html#services" class="nav__link">Services</a></li>
+          <li><a href="../capability.html" class="nav__link">Capability</a></li>
+          <li><a href="../index.html#projects" class="nav__link">Projects</a></li>
+          <li><a href="../about.html" class="nav__link">About</a></li>
+          <li><a href="../contact.html" class="nav__link">Contact</a></li>
+        </ul>
+
+        <div class="nav__actions">
+          <a href="tel:+61459604470" class="nav__phone" aria-label="Call 0459 604 470">0459 604 470</a>
+          <a href="../contact.html" class="btn btn--primary btn--sm nav__cta">Request a quote</a>
+          <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+            <span class="nav__toggle-bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="nav-drawer" id="nav-drawer">
+      <a href="../index.html#services" class="nav-drawer__link">Services</a>
+      <a href="../capability.html" class="nav-drawer__link">Capability</a>
+      <a href="../index.html#projects" class="nav-drawer__link">Projects</a>
+      <a href="../about.html" class="nav-drawer__link">About</a>
+      <a href="../contact.html" class="nav-drawer__link">Contact</a>
+      <div class="nav-drawer__meta">
+        <a href="tel:+61459604470" class="nav-drawer__phone">0459 604 470</a>
+        <a href="../contact.html" class="btn btn--primary">Request a quote</a>
+        <p class="nav-drawer__note">Mon–Fri, 7:00 AM – 5:00 PM · Brisbane · Gold Coast · Ipswich · Logan · Sunshine Coast · Toowoomba</p>
+      </div>
+    </div>
   </header>
 
-  <!-- COLOURS -->
-  <section class="demo-section">
-    <div class="demo-title">01 — Colours</div>
-    <div class="swatch-grid">
-      <div class="swatch">
-        <div class="swatch-color" style="background: #B8922A;"></div>
-        <div class="swatch-info">
-          <div class="swatch-name">Brass Gold</div>
-          <div class="swatch-hex">#B8922A</div>
+  <main id="main" class="page-offset">
+    <section class="section section--dark page-hero" aria-labelledby="ds-title">
+      <div class="container">
+        <span class="eyebrow">Reference · Design system v2.1</span>
+        <h1 class="page-hero__title" id="ds-title">Golden Stone Design System</h1>
+        <p class="lead page-hero__lead">Tokens, components and rules used by goldenstoneqld.com.au. Based on Brand Book v2.0 and the September 2026 redesign. Every value on this page comes from <code>src/styles/tokens.css</code>.</p>
+      </div>
+    </section>
+
+    <div class="container ds">
+      <nav class="ds__toc" aria-label="Page contents">
+        <span class="ds__toc-label">Contents</span>
+        <ol>
+          <li><a href="#colour">Colour &amp; contrast</a></li>
+          <li><a href="#type">Typography</a></li>
+          <li><a href="#space">Spacing &amp; radii</a></li>
+          <li><a href="#buttons">Buttons</a></li>
+          <li><a href="#heads">Section heads &amp; labels</a></li>
+          <li><a href="#stats">Stat row</a></li>
+          <li><a href="#ifl">IFL rail</a></li>
+          <li><a href="#lists">Schedule, checklist, points</a></li>
+          <li><a href="#cards">Cards &amp; blocks</a></li>
+          <li><a href="#media">Media &amp; captions</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#animation">Hero animation</a></li>
+          <li><a href="#rules">Rules</a></li>
+        </ol>
+      </nav>
+
+      <div class="ds__body">
+
+        <section class="ds__section" id="colour">
+          <span class="eyebrow">01 · Colour</span>
+          <h2>Colour &amp; contrast</h2>
+          <p>Gold is a dark-background colour. On Warm Cream it decorates; it never carries text. Muted text on cream uses <code>--colour-text-muted</code>, not Stone Grey.</p>
+          <ul class="swatches">
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-gold)"></div>
+          <div class="swatch__meta">
+            <strong>Brass Gold</strong>
+            <code>--colour-gold</code>
+            <span class="mono">#B8922A</span>
+            <p>Brand. Rules, marks, CTAs. Text on dark only.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-gold-dark)"></div>
+          <div class="swatch__meta">
+            <strong>Dark Gold</strong>
+            <code>--colour-gold-dark</code>
+            <span class="mono">#7A5F1A</span>
+            <p>The only gold that may carry text on cream.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-gold-light)"></div>
+          <div class="swatch__meta">
+            <strong>Champagne</strong>
+            <code>--colour-gold-light</code>
+            <span class="mono">#C9A84C</span>
+            <p>Hover on gold buttons; highlights on dark.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-black)"></div>
+          <div class="swatch__meta">
+            <strong>Deep Black</strong>
+            <code>--colour-black</code>
+            <span class="mono">#111111</span>
+            <p>Anchor. Dark sections, body text.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-surface-dark)"></div>
+          <div class="swatch__meta">
+            <strong>Surface Dark</strong>
+            <code>--colour-surface-dark</code>
+            <span class="mono">#1C1A18</span>
+            <p>Dark section variant (IFL, CTA).</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-bg)"></div>
+          <div class="swatch__meta">
+            <strong>Warm Cream</strong>
+            <code>--colour-bg</code>
+            <span class="mono">#F5F0E8</span>
+            <p>Page ground.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-surface)"></div>
+          <div class="swatch__meta">
+            <strong>Surface</strong>
+            <code>--colour-surface</code>
+            <span class="mono">#EDE7DA</span>
+            <p>Alternating sections, tiles.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-border)"></div>
+          <div class="swatch__meta">
+            <strong>Border</strong>
+            <code>--colour-border</code>
+            <span class="mono">#D8D0C0</span>
+            <p>Hairlines, input outlines.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-stone)"></div>
+          <div class="swatch__meta">
+            <strong>Stone Grey</strong>
+            <code>--colour-stone</code>
+            <span class="mono">#9E9790</span>
+            <p>Decoration on light. Muted text on dark only.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-text-sec)"></div>
+          <div class="swatch__meta">
+            <strong>Text Secondary</strong>
+            <code>--colour-text-sec</code>
+            <span class="mono">#5C5650</span>
+            <p>Supporting copy on light.</p>
+          </div>
+        </li>
+        <li class="swatch">
+          <div class="swatch__chip" style="background: var(--colour-text-muted)"></div>
+          <div class="swatch__meta">
+            <strong>Text Muted</strong>
+            <code>--colour-text-muted</code>
+            <span class="mono">#6E675E</span>
+            <p>Labels, hints on light (new in v2.1).</p>
+          </div>
+        </li>
+          </ul>
+
+          <h3>Measured contrast (WCAG 2.1)</h3>
+          <div class="ds__table-wrap">
+          <table class="ds__table">
+            <thead><tr><th>Pair</th><th>Ratio</th><th>Verdict</th></tr></thead>
+            <tbody>
+              <tr><td>Deep Black on Warm Cream</td><td class="mono">16.65 : 1</td><td>AAA</td></tr>
+              <tr><td>Text Secondary on Warm Cream</td><td class="mono">6.38 : 1</td><td>AA body</td></tr>
+              <tr><td>Text Muted on Warm Cream</td><td class="mono">4.92 : 1</td><td>AA body</td></tr>
+              <tr><td>Dark Gold on Warm Cream</td><td class="mono">5.32 : 1</td><td>AA body — gold text on cream</td></tr>
+              <tr><td>Brass Gold on Warm Cream</td><td class="mono">2.58 : 1</td><td class="ds__fail">Fails — decoration only</td></tr>
+              <tr><td>Stone Grey on Warm Cream</td><td class="mono">2.54 : 1</td><td class="ds__fail">Fails — decoration only</td></tr>
+              <tr><td>Brass Gold on Deep Black</td><td class="mono">6.46 : 1</td><td>AA body</td></tr>
+              <tr><td>Brass Gold on Surface Dark</td><td class="mono">5.93 : 1</td><td>AA body</td></tr>
+              <tr><td>Cream 55 % on Deep Black (<code>--colour-on-dark-muted</code>)</td><td class="mono">≈ 5.5 : 1</td><td>AA body</td></tr>
+              <tr><td>Deep Black on Brass Gold (primary button)</td><td class="mono">6.46 : 1</td><td>AA body</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </section>
+
+        <section class="ds__section" id="type">
+          <span class="eyebrow">02 · Typography</span>
+          <h2>Typography</h2>
+          <p>Barlow Semi Condensed 600/700 for display. DM Sans 400/500 for body. A system monospace stack for figures that describe physical reality or process state: step numbers, millimetres, the ABN, the phone number, stat units. Nowhere else.</p>
+          <div class="ds__type">
+            <div class="ds__type-row"><span class="ds__type-label">.hero__title · clamp(42–72px) · Barlow 700</span><p class="hero__title ds__inline-title">Crafted in Stone.</p></div>
+            <div class="ds__type-row"><span class="ds__type-label">h1 · 42px · Barlow 700</span><p class="ds__h1">Capability Statement</p></div>
+            <div class="ds__type-row"><span class="ds__type-label">h2 · 34px · Barlow 700</span><p class="ds__h2">Integrated Fabrication Lifecycle</p></div>
+            <div class="ds__type-row"><span class="ds__type-label">h3 · 26px · Barlow 600</span><p class="ds__h3">CNC Bridge Saw</p></div>
+            <div class="ds__type-row"><span class="ds__type-label">.lead · 18–20px · DM Sans 400</span><p class="lead">Professional-grade equipment gives Golden Stone direct control over cutting, finishing and production quality.</p></div>
+            <div class="ds__type-row"><span class="ds__type-label">body · 16px · DM Sans 400 · 1.6</span><p>Our capability covers templating, planning, cutting, polishing, quality control, delivery and installation — managed as one connected workflow.</p></div>
+            <div class="ds__type-row"><span class="ds__type-label">.eyebrow · 12px mono · 0.14em</span><span class="eyebrow">In-house fabrication · Moorang QLD</span></div>
+            <div class="ds__type-row"><span class="ds__type-label">.tag · 12px mono</span><span class="tag">IFL 06 · Cut</span></div>
+            <div class="ds__type-row"><span class="ds__type-label">.mono · figures</span><span class="mono">3200 × 650 · 20 mm · ABN 95 497 084 038 · 0459 604 470</span></div>
+          </div>
+        </section>
+
+        <section class="ds__section" id="space">
+          <span class="eyebrow">03 · Spacing</span>
+          <h2>Spacing &amp; radii</h2>
+          <p>An 8pt grid with 4pt half-steps. Major sections sit <code>--space-24</code> apart on desktop. Stone is not rounded: <code>--radius-sm</code> (2px) on buttons and inputs, square edges on every large surface.</p>
+          <ul class="ds__spaces">
+            <li><span class="mono">--space-2</span><i style="width: var(--space-2)"></i><span>8px</span></li>
+            <li><span class="mono">--space-4</span><i style="width: var(--space-4)"></i><span>16px</span></li>
+            <li><span class="mono">--space-6</span><i style="width: var(--space-6)"></i><span>24px</span></li>
+            <li><span class="mono">--space-8</span><i style="width: var(--space-8)"></i><span>32px</span></li>
+            <li><span class="mono">--space-12</span><i style="width: var(--space-12)"></i><span>48px</span></li>
+            <li><span class="mono">--space-16</span><i style="width: var(--space-16)"></i><span>64px</span></li>
+            <li><span class="mono">--space-24</span><i style="width: var(--space-24)"></i><span>96px</span></li>
+          </ul>
+        </section>
+
+        <section class="ds__section" id="buttons">
+          <span class="eyebrow">04 · Buttons</span>
+          <h2>Buttons</h2>
+          <p>Uppercase DM Sans 500, 2px radius. Primary is gold with black text (6.5:1). Outline on light uses black; on dark it uses cream.</p>
+          <div class="ds__demo">
+            <div class="btn-group">
+              <a href="#buttons" class="btn btn--primary">Request a quote</a>
+              <a href="#buttons" class="btn btn--outline">View our capability</a>
+              <a href="#buttons" class="btn btn--ghost">The ten-step lifecycle</a>
+              <a href="#buttons" class="btn btn--dark">Dark</a>
+              <a href="#buttons" class="btn btn--primary btn--sm">Small</a>
+              <a href="#buttons" class="btn btn--primary btn--lg">Large</a>
+            </div>
+          </div>
+          <div class="ds__demo ds__demo--dark section--dark">
+            <div class="btn-group">
+              <a href="#buttons" class="btn btn--primary">Request a quote</a>
+              <a href="#buttons" class="btn btn--outline-light">View our capability</a>
+              <a href="#buttons" class="btn btn--ghost">Ghost on dark</a>
+              <a href="#buttons" class="btn btn--outline-light mono">0459 604 470</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds__section" id="heads">
+          <span class="eyebrow">05 · Section heads</span>
+          <h2>Section heads &amp; labels</h2>
+          <p><code>.section-head</code> stacks eyebrow, title and lead. <code>.section-head--split</code> puts the title left and the lead right on desktop. <code>.page-hero</code> is the compact dark header for inner pages, with <code>.breadcrumb</code>.</p>
+          <div class="ds__demo">
+            <div class="section-head section-head--split" style="margin-bottom: 0">
+              <div>
+                <span class="eyebrow">In-house fabrication · Moorang QLD</span>
+                <h2 class="section-head__title">In-House Fabrication</h2>
+              </div>
+              <p class="lead">Professional-grade equipment gives Golden Stone direct control over cutting, finishing and production quality.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds__section" id="stats">
+          <span class="eyebrow">06 · Stat row</span>
+          <h2>Stat row</h2>
+          <p>A definition list. Numerals at display size; word figures (<code>.stat__figure--word</code>) run smaller so they never exceed their column. Gold hairline above each. Followed by <code>.materials</code>.</p>
+          <div class="ds__demo">
+            <dl class="stats">
+              <div class="stat"><dt class="stat__label">Years of industry experience</dt><dd class="stat__figure">15<sup>+</sup></dd></div>
+              <div class="stat"><dt class="stat__label">Cutting &amp; polishing</dt><dd class="stat__figure stat__figure--word">In-house</dd></div>
+              <div class="stat"><dt class="stat__label">Six core regions serviced</dt><dd class="stat__figure stat__figure--word">SEQ</dd></div>
+              <div class="stat"><dt class="stat__label">Measure to installation</dt><dd class="stat__figure stat__figure--word">End-to-end</dd></div>
+            </dl>
+            <div class="materials">
+              <span class="materials__label">Materials</span>
+              <ul class="materials__list"><li>Granite</li><li>Marble</li><li>Quartzite</li><li>Silica-free engineered stone options</li></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds__section" id="ifl">
+          <span class="eyebrow">07 · IFL rail</span>
+          <h2>IFL rail</h2>
+          <p>An ordered list of ten steps on a gold rail with tape-measure ticks. Two rows of five from 1024px; a vertical rail below. Square nodes: outline for a process step, filled (<code>.ifl__step--evidenced</code>) where a photograph on the page shows the step, double (<code>.ifl__step--gate</code>) for the quality gate. Add <code>.ifl--reveal</code> for the scroll-in draw; the content never depends on it.</p>
+          <div class="ds__demo ds__demo--dark section--dark-surface">
+            <ol class="ifl">
+              <li class="ifl__step"><span class="ifl__num">01</span><h3 class="ifl__name">Enquiry</h3><p class="ifl__desc">Scope &amp; requirements</p></li>
+              <li class="ifl__step"><span class="ifl__num">02</span><h3 class="ifl__name">Quote</h3><p class="ifl__desc">Clear commercial scope</p></li>
+              <li class="ifl__step ifl__step--evidenced"><span class="ifl__num">03</span><h3 class="ifl__name">Measure</h3><p class="ifl__desc">Site template &amp; checks</p></li>
+              <li class="ifl__step"><span class="ifl__num">04</span><h3 class="ifl__name">Plan</h3><p class="ifl__desc">Design &amp; fabrication planning</p></li>
+              <li class="ifl__step"><span class="ifl__num">05</span><h3 class="ifl__name">Material</h3><p class="ifl__desc">Slab selection &amp; allocation</p></li>
+              <li class="ifl__step ifl__step--evidenced"><span class="ifl__num">06</span><h3 class="ifl__name">Cut</h3><p class="ifl__desc">Automated bridge saw</p></li>
+              <li class="ifl__step ifl__step--evidenced"><span class="ifl__num">07</span><h3 class="ifl__name">Polish</h3><p class="ifl__desc">Edge processing &amp; finishing</p></li>
+              <li class="ifl__step ifl__step--gate"><span class="ifl__num">08</span><h3 class="ifl__name">QC</h3><p class="ifl__desc">Dimensional &amp; finish check</p></li>
+              <li class="ifl__step ifl__step--evidenced"><span class="ifl__num">09</span><h3 class="ifl__name">Install</h3><p class="ifl__desc">Delivery &amp; professional install</p></li>
+              <li class="ifl__step"><span class="ifl__num">10</span><h3 class="ifl__name">Handover</h3><p class="ifl__desc">Completion &amp; close-out</p></li>
+            </ol>
+            <div class="ifl-legend">
+              <span class="ifl-legend__item"><span class="ifl-legend__node ifl-legend__node--filled"></span>Evidenced</span>
+              <span class="ifl-legend__item"><span class="ifl-legend__node"></span>Process step</span>
+              <span class="ifl-legend__item"><span class="ifl-legend__node ifl-legend__node--gate"></span>Quality gate</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds__section" id="lists">
+          <span class="eyebrow">08 · Lists</span>
+          <h2>Schedule, checklist, points, steps</h2>
+          <p><code>.schedule</code> — rows of large type with hairlines, like a drawing schedule. <code>.checklist</code> — gold square bullets, optional two columns. <code>.points</code> — a grid of short statements. <code>.steps3</code> — the three-step client summary with counters.</p>
+          <div class="ds__demo">
+            <ol class="schedule">
+              <li class="schedule__row">Kitchen benchtops, islands and waterfall ends</li>
+              <li class="schedule__row">Bathroom vanities, niches and feature surfaces</li>
+            </ol>
+            <ul class="checklist checklist--2 mt-8">
+              <li>Digital templating and fabrication planning</li>
+              <li>Sink, hob and appliance cut-outs</li>
+              <li>Waterfall, mitred and profiled edge work</li>
+              <li>Quality checks before delivery</li>
+            </ul>
+            <ul class="points points--gold mt-8">
+              <li>One connected workflow from quote to install</li>
+              <li>In-house automated cutting and polishing</li>
+              <li>Visible quality gates before dispatch</li>
+            </ul>
+            <ol class="steps3 mt-8">
+              <li><h3>Measure &amp; Template</h3><p>On-site confirmation of dimensions, access, cabinetry readiness and fabrication details.</p></li>
+              <li><h3>Fabricate</h3><p>Cutting, edge processing, cut-outs, finishing and quality control completed in-house.</p></li>
+              <li><h3>Deliver &amp; Install</h3><p>Coordinated site delivery and professional installation to the agreed project scope.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="ds__section" id="cards">
+          <span class="eyebrow">09 · Cards</span>
+          <h2>Cards &amp; blocks</h2>
+          <p>Square edges, hairline borders, no drop shadows on photography. <code>.equip</code> for equipment, <code>.project</code> for installed work, <code>.person</code> for team, <code>.contact-block</code> for the canonical details.</p>
+          <div class="ds__demo">
+            <div class="grid grid-2">
+              <article class="equip">
+                <div class="frame frame--3-2"><img src="../public/images/fab-cnc-bridge-saw-800w.jpg" width="800" height="516" alt="CNC bridge saw in the Golden Stone fabrication facility at Moorang." loading="lazy"></div>
+                <div class="equip__body"><span class="tag">IFL 06 · Cut</span><h3 class="equip__title">CNC Bridge Saw</h3><p>Automated cutting capability for repeatable benchtops, islands, cut-outs, splashbacks and custom components.</p></div>
+              </article>
+              <article class="project">
+                <div class="frame frame--4-3"><img src="../public/images/project-butlers-pantry-800w.jpg" width="800" height="592" alt="Butler's pantry with a continuous stone worktop and internal corner detailing." loading="lazy"></div>
+                <div class="project__meta"><h3 class="project__title">Butler's Pantry</h3><span class="tag">03 / 04</span></div>
+                <p class="project__caption">Continuous stone worktop with internal corner detailing</p>
+              </article>
+            </div>
+            <div class="grid grid-2 mt-12">
+              <div class="person"><h3 class="person__name">Emerson</h3><p class="person__role">Stonemason</p><p>Certificate III in Stonemasonry (CPC32320) — a nationally recognised qualification, issued 09 June 2026.</p></div>
+              <dl class="contact-block contact-block--2">
+                <div class="contact-block__row"><dt>Office</dt><dd>37 Donna Ave, Rochedale South QLD 4123</dd></div>
+                <div class="contact-block__row"><dt>Phone</dt><dd><a href="tel:+61459604470" class="mono">0459 604 470</a></dd></div>
+                <div class="contact-block__row"><dt>Factory</dt><dd>1819 Tarome Rd, Moorang QLD 4340</dd></div>
+                <div class="contact-block__row"><dt>ABN</dt><dd class="mono">95 497 084 038</dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds__section" id="media">
+          <span class="eyebrow">10 · Media</span>
+          <h2>Media &amp; captions</h2>
+          <p><code>.frame</code> sets an aspect ratio and crops with <code>object-fit: cover</code>; ratios: <code>--3-2</code>, <code>--4-3</code>, <code>--3-4</code>, <code>--21-9</code>, <code>--wide</code>, <code>--panel</code>. Every photograph uses <code>&lt;picture&gt;</code> with WebP + JPEG, explicit width and height, and the manifest alt text. <code>.figure__caption</code> overlays a tag and a line on a gradient; <code>.caption</code> sits under the picture.</p>
+          <div class="ds__demo ds__demo--flush">
+            <figure class="figure">
+              <div class="frame frame--wide"><img src="../public/images/fab-factory-floor-wide-800w.jpg" width="800" height="363" alt="The Golden Stone workshop floor, with the polishing line and bridge saw in operation." loading="lazy"></div>
+              <figcaption class="figure__caption"><span class="tag">Factory · Moorang QLD</span><span>In-house fabrication supports precision, consistency and direct production control.</span></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="ds__section" id="forms">
+          <span class="eyebrow">11 · Forms</span>
+          <h2>Forms</h2>
+          <p>Class names <code>.form-group</code>, <code>.form-label</code>, <code>.form-input</code>, <code>.form-select</code>, <code>.form-error</code>, <code>.is-invalid</code> and the file-upload hooks are read by <code>src/scripts/contact.js</code>. Restyle them; never rename them. Focus is a 3px dark-gold ring; error is <code>--colour-error</code>.</p>
+          <div class="ds__demo">
+            <form class="form" action="#forms" onsubmit="return false">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label" for="ds-name">Full Name <span class="form-required">*</span></label><input class="form-input" id="ds-name" type="text" placeholder="e.g. Sarah Johnson"></div>
+                <div class="form-group"><label class="form-label" for="ds-phone">Phone <span class="form-required">*</span></label><input class="form-input is-invalid" id="ds-phone" type="tel" value="04" aria-invalid="true"><span class="form-error">Please enter a valid phone number.</span></div>
+              </div>
+              <div class="form-group"><label class="form-label" for="ds-type">Project Type</label><div class="form-select-wrap"><select class="form-input form-select" id="ds-type"><option>Kitchen Benchtop</option><option>Bathroom Vanity</option></select><span class="form-select-arrow" aria-hidden="true"></span></div></div>
+              <div class="form-group"><label class="form-label" for="ds-msg">Tell us about your project</label><textarea class="form-input form-textarea" id="ds-msg" rows="3" placeholder="Describe your project…"></textarea></div>
+              <button type="submit" class="btn btn--primary btn--lg">Submit Quote Request</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="ds__section" id="animation">
+          <span class="eyebrow">12 · Hero animation</span>
+          <h2>Hero animation</h2>
+          <p><code>src/styles/components/hero-animation.css</code> — a real L-run (3200 × 650, 2400 return, 700 × 400 sink, 600 cooktop) drawn as a dimensioned plan, lifted into 3D and rendered as stone. Pure SVG + CSS, 10-second loop, <code>aria-hidden</code>. Its colours come from the <code>--hero-*</code> tokens; it runs on Deep Black only. Under <code>prefers-reduced-motion</code> it stops on the finished benchtop.</p>
+          <div class="ds__demo ds__demo--dark section--dark">
+          <!--
+            A real Golden Stone L-run: 3200 × 650 with a 2400 return,
+            700 × 400 undermount sink set clear of the inner corner, 600 cooktop. Dimensions are in millimetres.
+            Decorative — aria-hidden, so it is never announced to screen readers.
+          -->
+          <div class="hero-scene" aria-hidden="true">
+            <div class="hero-stage">
+              <svg class="hero-svg" viewBox="0 0 520 300" role="presentation" focusable="false">
+                <defs>
+                  <filter id="gs-stone-veins" x="0" y="0" width="1" height="1">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="7" result="noise"/>
+                    <feColorMatrix in="noise" type="matrix"
+                                   values="0 0 0 0 0.86  0 0 0 0 0.87  0 0 0 0 0.85  0 0 0 0.9 0" result="tint"/>
+                    <feComponentTransfer in="tint"><feFuncA type="table" tableValues="0.55 1"/></feComponentTransfer>
+                  </filter>
+                  <linearGradient id="gs-hero-sheen" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0"   stop-color="#fff" stop-opacity="0"/>
+                    <stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/>
+                    <stop offset="1"   stop-color="#fff" stop-opacity="0"/>
+                  </linearGradient>
+                  <radialGradient id="gs-hero-sink" cx="0.5" cy="0.4" r="0.7">
+                    <stop offset="0" stop-color="#c9ced0"/><stop offset="1" stop-color="#6f7679"/>
+                  </radialGradient>
+                  <clipPath id="gs-hero-clip"><path d="M60 60 H460 V150 H180 V250 H60 Z"/></clipPath>
+                </defs>
+
+                <!-- Setting-out grid -->
+                <g class="hero-grid">
+                  <path d="M20 40 H500 M20 80 H500 M20 120 H500 M20 160 H500 M20 200 H500 M20 240 H500 M20 280 H500 M40 20 V290 M80 20 V290 M120 20 V290 M160 20 V290 M200 20 V290 M240 20 V290 M280 20 V290 M320 20 V290 M360 20 V290 M400 20 V290 M440 20 V290 M480 20 V290"/>
+                </g>
+
+                <!-- Stage 3: the fabricated benchtop -->
+                <g class="hero-real">
+                  <path class="hero-thickness" d="M60 60 H460 V150 H180 V250 H60 Z" transform="translate(0 7)"/>
+                  <path class="hero-stone"     d="M60 60 H460 V150 H180 V250 H60 Z"/>
+                  <rect class="hero-stone-texture" x="60" y="60" width="400" height="190"
+                        filter="url(#gs-stone-veins)" clip-path="url(#gs-hero-clip)"/>
+                  <rect class="hero-sheen" x="-200" y="60" width="180" height="190"
+                        fill="url(#gs-hero-sheen)" clip-path="url(#gs-hero-clip)"/>
+                  <rect x="226" y="84" width="88" height="46" rx="6" fill="url(#gs-hero-sink)"/>
+                  <rect x="234" y="90" width="72" height="34" rx="4" fill="#3b4245" opacity="0.55"/>
+                  <rect x="358" y="80" width="75" height="56" rx="5" fill="#15181a"/>
+                  <circle cx="377" cy="98"  r="9"  fill="none" stroke="#5c6466" stroke-width="1.2"/>
+                  <circle cx="414" cy="98"  r="11" fill="none" stroke="#5c6466" stroke-width="1.2"/>
+                  <circle cx="377" cy="120" r="7"  fill="none" stroke="#5c6466" stroke-width="1.2"/>
+                  <circle cx="414" cy="120" r="9"  fill="none" stroke="#5c6466" stroke-width="1.2"/>
+                </g>
+
+                <!-- Stage 1 + 2: the plan being drawn, then dimensioned -->
+                <g class="hero-plan">
+                  <path class="hero-outline" d="M60 60 H460 V150 H180 V250 H60 Z"/>
+                  <rect class="hero-cutout" x="226" y="84" width="88" height="46" rx="6"/>
+                  <rect class="hero-cutout" x="358" y="80" width="75" height="56" rx="5"/>
+                  <circle class="hero-cutout" cx="270" cy="107" r="3"/>
+                  <g class="hero-dims">
+                    <path d="M60 40 v8 M460 40 v8 M60 44 H460"/>
+                    <text x="260" y="34" text-anchor="middle">3200</text>
+                    <path d="M480 60 h8 M480 150 h8 M484 60 V150"/>
+                    <text x="497" y="108" transform="rotate(90 497 108)" text-anchor="middle">650</text>
+                    <path d="M40 60 h-8 M40 250 h-8 M36 60 V250"/>
+                    <text x="26" y="158" transform="rotate(-90 26 158)" text-anchor="middle">2400</text>
+                    <path d="M180 270 v-8 M60 270 v-8 M60 266 H180"/>
+                    <text x="120" y="284" text-anchor="middle">700</text>
+                    <text x="270" y="142" text-anchor="middle" class="hero-label">sink 700&#215;400</text>
+                    <text x="396" y="150" text-anchor="middle" class="hero-label">cooktop 600</text>
+                  </g>
+                </g>
+
+                <!-- Templating scan pass -->
+                <rect class="hero-scan" x="20" y="-4" width="480" height="3"/>
+              </svg>
+            </div>
+
+            <div class="hero-hud">
+              <span class="hero-step hero-step-1"><b>01</b> Measure &middot; template &middot; 3200 &times; 650</span>
+              <span class="hero-step hero-step-2"><b>02</b> Fabricate &middot; cut &middot; polish &middot; 20 mm</span>
+              <span class="hero-step hero-step-3"><b>03</b> Installed &middot; Calacatta &middot; handover</span>
+            </div>
+          </div>
+  
+          </div>
+        </section>
+
+        <section class="ds__section" id="rules">
+          <span class="eyebrow">13 · Rules</span>
+          <h2>Rules</h2>
+          <ul class="checklist">
+            <li>No literal hex colours outside <code>tokens.css</code>. Components reference tokens only.</li>
+            <li>Gold is punctuation, not paint: a rule, a numeral, a hairline, the CTA. Never body text on cream.</li>
+            <li>Monospace only for figures that describe physical reality or process state.</li>
+            <li>Every photograph: <code>&lt;picture&gt;</code>, WebP + JPEG, width and height, manifest alt text. Only the hero image is eager.</li>
+            <li>Content never depends on script. <code>.reveal</code> and <code>.ifl--reveal</code> apply only under <code>html.js</code> with motion allowed.</li>
+            <li>Total JavaScript under 15 KB unminified. Today: <code>main.js</code> 2.8 KB + <code>contact.js</code> 12.0 KB.</li>
+            <li>Australian English in copy, comments and filenames.</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="../public/images/brand/gs-monogram-inverted.svg" alt="Golden Stone QLD" width="66" height="40">
+          <p class="footer__tagline">Crafted in Stone. Built to Last.</p>
+          <p class="footer__desc">Premium stone masonry, in-house fabrication and professional installation for residential and commercial projects across South East Queensland.</p>
+        </div>
+        <div>
+          <h2 class="footer__heading">Explore</h2>
+          <ul class="footer__links" role="list">
+            <li><a href="../index.html#services">Services</a></li>
+            <li><a href="../capability.html">Capability statement</a></li>
+            <li><a href="../index.html#lifecycle">Integrated Fabrication Lifecycle</a></li>
+            <li><a href="../index.html#projects">Selected projects</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Request a quote</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer__heading">Service area</h2>
+          <ul class="footer__links" role="list">
+            <li>Brisbane</li>
+            <li>Gold Coast</li>
+            <li>Ipswich</li>
+            <li>Logan</li>
+            <li>Sunshine Coast</li>
+            <li>Toowoomba</li>
+            <li>Surrounding South East Queensland</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer__heading">Contact</h2>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__label">Phone</span><a href="tel:+61459604470" class="mono">0459 604 470</a></li>
+            <li><span class="footer__label">Email</span><a href="mailto:sales@goldenstoneqld.com.au">sales@goldenstoneqld.com.au</a></li>
+            <li><span class="footer__label">Office</span>37 Donna Ave, Rochedale South QLD 4123</li>
+            <li><span class="footer__label">Factory</span>1819 Tarome Rd, Moorang QLD 4340</li>
+            <li><span class="footer__label">Hours</span>Mon–Fri, 7:00 AM – 5:00 PM</li>
+          </ul>
         </div>
       </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: #111111;"></div>
-        <div class="swatch-info">
-          <div class="swatch-name">Deep Black</div>
-          <div class="swatch-hex">#111111</div>
-        </div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: #F5F0E8;"></div>
-        <div class="swatch-info">
-          <div class="swatch-name">Warm Cream</div>
-          <div class="swatch-hex">#F5F0E8</div>
-        </div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background: #FFFFFF; border: 1px solid #ddd;"></div>
-        <div class="swatch-info">
-          <div class="swatch-name">White</div>
-          <div class="swatch-hex">#FFFFFF</div>
-        </div>
+      <div class="footer__bottom">
+        <p>&copy; <span id="footer-year">2026</span> Golden Stone QLD. All rights reserved.</p>
+        <p><span class="mono">ABN 95 497 084 038</span></p>
+        <p>Brisbane · Queensland · Australia</p>
       </div>
     </div>
-    <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--color-text-secondary, #5C5C62);">
-      Refer to <code>tokens.css</code> for the full palette including neutrals and supporting colours.
-    </p>
-  </section>
-
-  <!-- TYPOGRAPHY -->
-  <section class="demo-section">
-    <div class="demo-title">02 — Typography</div>
-    <div class="type-row">
-      <div class="type-label">h1 — Display, Barlow Semi Condensed</div>
-      <h1>Crafted in Stone. Built to Last.</h1>
-    </div>
-    <div class="type-row">
-      <div class="type-label">h2</div>
-      <h2>Premium Stonemason Services</h2>
-    </div>
-    <div class="type-row">
-      <div class="type-label">h3</div>
-      <h3>Kitchen Benchtops in Natural Stone</h3>
-    </div>
-    <div class="type-row">
-      <div class="type-label">h4</div>
-      <h4>Section Heading Example</h4>
-    </div>
-    <div class="type-row">
-      <div class="type-label">Body — DM Sans</div>
-      <p>Golden Stone QLD supplies and installs kitchen benchtops in natural and engineered stone across South-East Queensland. We work with joineries and home owners who value reliable scheduling, clear communication, and 15+ years of stone masonry experience.</p>
-    </div>
-    <div class="type-row">
-      <div class="type-label">Small / Caption</div>
-      <small>Servicing Brisbane, Ipswich, Logan, Gold Coast, and surrounding SEQ.</small>
-    </div>
-  </section>
-
-  <!-- BUTTONS -->
-  <section class="demo-section">
-    <div class="demo-title">03 — Buttons</div>
-    <div class="button-row">
-      <button class="btn btn-primary">Get a Quote</button>
-      <button class="btn btn-outline">View Our Work</button>
-      <button class="btn btn-ghost">Learn More</button>
-    </div>
-    <div class="button-row">
-      <button class="btn btn-primary" disabled>Disabled</button>
-      <a href="#" class="btn btn-primary">Link as Button</a>
-    </div>
-  </section>
-
-  <!-- CARDS -->
-  <section class="demo-section">
-    <div class="demo-title">04 — Cards</div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Default Card</h3>
-        <p>Standard card with body content. Used for service tiles and general content blocks.</p>
-      </div>
-      <div class="card card-bordered">
-        <h3>Bordered Card</h3>
-        <p>Adds a subtle border for content that needs more definition.</p>
-      </div>
-      <div class="card card-dark">
-        <h3>Dark Card</h3>
-        <p>Inverted variant for dark sections and high-contrast features.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FORMS -->
-  <section class="demo-section">
-    <div class="demo-title">05 — Form Elements</div>
-    <div class="form-demo">
-      <div>
-        <label for="demo-name">Full Name</label>
-        <input id="demo-name" type="text" placeholder="John Smith">
-      </div>
-      <div>
-        <label for="demo-email">Email</label>
-        <input id="demo-email" type="email" placeholder="you@example.com">
-      </div>
-      <div>
-        <label for="demo-project">Project Type</label>
-        <select id="demo-project">
-          <option>Kitchen Benchtop</option>
-          <option>Bathroom Vanity</option>
-          <option>Custom Stonework</option>
-        </select>
-      </div>
-      <div>
-        <label for="demo-message">Message</label>
-        <textarea id="demo-message" rows="4" placeholder="Tell us about your project..."></textarea>
-      </div>
-      <button class="btn btn-primary">Send Request</button>
-    </div>
-  </section>
-
-  <!-- SPACING -->
-  <section class="demo-section">
-    <div class="demo-title">06 — Spacing Scale (8pt grid)</div>
-    <div class="spacing-row"><div class="spacing-label">--space-1 · 4px</div><div class="spacing-bar" style="width: 4px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-2 · 8px</div><div class="spacing-bar" style="width: 8px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-3 · 12px</div><div class="spacing-bar" style="width: 12px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-4 · 16px</div><div class="spacing-bar" style="width: 16px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-6 · 24px</div><div class="spacing-bar" style="width: 24px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-8 · 32px</div><div class="spacing-bar" style="width: 32px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-12 · 48px</div><div class="spacing-bar" style="width: 48px;"></div></div>
-    <div class="spacing-row"><div class="spacing-label">--space-16 · 64px</div><div class="spacing-bar" style="width: 64px;"></div></div>
-  </section>
-
-  <footer style="text-align: center; padding: 2rem 0; color: var(--color-text-secondary, #5C5C62); font-size: 0.85rem;">
-    Golden Stone QLD · Design System v1.0 · Brisbane, Australia
   </footer>
 
+  <a href="https://wa.me/61459604470" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp (opens in a new tab)">
+    <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.518 5.832L.057 23.625a.563.563 0 0 0 .693.704l5.975-1.566A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.372l-.358-.213-3.722.976.993-3.63-.233-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+    </svg>
+  </a>
+
+  <script src="../src/scripts/main.js" defer></script>
 </body>
 </html>

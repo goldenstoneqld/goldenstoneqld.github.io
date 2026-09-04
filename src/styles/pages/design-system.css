@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Golden Stone QLD — Design System reference page (docs/design-system.html)
+   Demo chrome only. Uses tokens; not part of the shipped component set.
+   ========================================================================== */
+.ds { display: grid; gap: var(--space-12); padding-block: var(--space-12) var(--space-24); }
+@media (min-width: 1024px) { .ds { grid-template-columns: minmax(0, 2fr) minmax(0, 10fr); gap: var(--space-16); } }
+.ds__toc { align-self: start; }
+@media (min-width: 1024px) { .ds__toc { position: sticky; top: calc(var(--header-h) + var(--space-8)); } }
+.ds__toc-label { display: block; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--colour-text-muted); padding-bottom: var(--space-3); margin-bottom: var(--space-3); border-bottom: 1px solid var(--colour-border); }
+.ds__toc ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-1); counter-reset: toc; }
+.ds__toc li { margin: 0; counter-increment: toc; }
+.ds__toc a { display: block; padding: var(--space-1) 0; font-size: var(--text-sm); color: var(--colour-text-sec); text-decoration: none; }
+.ds__toc a::before { content: counter(toc, decimal-leading-zero) '  '; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--colour-gold-dark); }
+.ds__toc a:hover { color: var(--colour-text); }
+@media (max-width: 1023px) { .ds__toc ol { display: grid; grid-template-columns: 1fr 1fr; } }
+
+.ds__body { min-width: 0; }
+.ds__section { padding-block: var(--space-12); border-top: 1px solid var(--colour-border); }
+.ds__section:first-child { border-top: 0; padding-top: 0; }
+.ds__section > h2 { margin-bottom: var(--space-4); }
+.ds__section > h3 { margin: var(--space-10) 0 var(--space-4); font-size: var(--text-xl); }
+.ds__section > p { color: var(--colour-text-sec); margin-bottom: var(--space-8); }
+
+.ds__demo { padding: var(--space-8); border: 1px solid var(--colour-border); background: var(--colour-bg); margin-bottom: var(--space-6); }
+.ds__demo--dark { border-color: transparent; }
+.ds__demo--flush { padding: 0; }
+
+/* Swatches */
+.swatches { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-4); }
+.swatch { margin: 0; border: 1px solid var(--colour-border); background: var(--colour-white); }
+.swatch__chip { height: 72px; }
+.swatch__meta { padding: var(--space-3) var(--space-4); font-size: var(--text-sm); display: grid; gap: var(--space-1); }
+.swatch__meta strong { font-family: var(--font-display); font-weight: var(--font-semibold); font-size: var(--text-base); }
+.swatch__meta code { font-size: var(--text-xs); justify-self: start; }
+.swatch__meta .mono { color: var(--colour-text-muted); font-size: var(--text-xs); }
+.swatch__meta p { margin: 0; color: var(--colour-text-sec); font-size: var(--text-xs); }
+
+/* Table */
+.ds__table-wrap { overflow-x: auto; }
+.ds__table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.ds__table th, .ds__table td { text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--colour-border); vertical-align: top; }
+.ds__table th { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--colour-text-muted); font-weight: var(--font-medium); }
+.ds__fail { color: var(--colour-error); font-weight: var(--font-medium); }
+
+/* Type specimens */
+.ds__type { display: grid; gap: var(--space-6); }
+.ds__type-row { padding-bottom: var(--space-6); border-bottom: 1px dashed var(--colour-border); }
+.ds__type-label { display: block; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--colour-text-muted); margin-bottom: var(--space-3); letter-spacing: var(--tracking-wide); }
+.ds__inline-title { font-family: var(--font-display); font-weight: var(--font-bold); font-size: clamp(var(--text-4xl), 6vw, var(--text-giant)); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: 0; max-width: none; }
+.ds__h1 { font-family: var(--font-display); font-weight: var(--font-bold); font-size: var(--text-4xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: 0; }
+.ds__h2 { font-family: var(--font-display); font-weight: var(--font-bold); font-size: var(--text-3xl); line-height: var(--leading-snug); letter-spacing: var(--tracking-tight); margin: 0; }
+.ds__h3 { font-family: var(--font-display); font-weight: var(--font-semibold); font-size: var(--text-2xl); line-height: var(--leading-normal); margin: 0; }
+
+/* Spacing bars */
+.ds__spaces { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); }
+.ds__spaces li { margin: 0; display: grid; grid-template-columns: 7rem 1fr 3rem; align-items: center; gap: var(--space-4); font-size: var(--text-sm); color: var(--colour-text-sec); }
+.ds__spaces i { display: block; height: 12px; background: var(--colour-gold); }
+.ds__spaces .mono { font-size: var(--text-xs); }
+
+/* Animation demo sizing */
+.ds__demo .hero-scene { margin-inline: auto; }
+
+/* Dark demo boxes keep their own ground (the generic .ds__demo ground is cream) */
+.ds__demo--dark.section--dark { background: var(--colour-black); }
+.ds__demo--dark.section--dark-surface { background: var(--colour-surface-dark); }
