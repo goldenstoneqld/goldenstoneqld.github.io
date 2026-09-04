@@ -1,87 +1,59 @@
-/* ==========================================================================
-   Golden Stone QLD — Main JS
-   Header scroll effect · Mobile menu · Scroll fade-in animations
-   ========================================================================== */
-
+/* Golden Stone QLD — main.js
+   Header state · mobile drawer (focus trap, Escape) · scroll reveal · footer year.
+   Progressive enhancement only: every page reads without this file. */
 (function () {
   'use strict';
+  var d = document, html = d.documentElement;
 
-  /* ── Header scroll effect ──────────────────────────────────────────────── */
-  const header = document.getElementById('site-header');
-
+  /* Header turns solid once the page has scrolled */
+  var header = d.getElementById('site-header');
   if (header) {
-    const onScroll = () => {
-      if (window.scrollY > 40) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 24); };
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* Mobile drawer — traps focus between the toggle and its own links */
+  var toggle = d.getElementById('nav-toggle'), drawer = d.getElementById('nav-drawer');
+  if (toggle && drawer) {
+    var F = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])', open = false;
+    var setOpen = function (state) {
+      open = state;
+      drawer.classList.toggle('is-open', open);
+      html.classList.toggle('drawer-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) { var first = drawer.querySelector(F); if (first) first.focus(); }
+      else { toggle.focus(); }
     };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); /* Run once on load in case page is already scrolled */
+    toggle.addEventListener('click', function () { setOpen(!open); });
+    drawer.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+    d.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { e.preventDefault(); setOpen(false); return; }
+      if (e.key !== 'Tab') return;
+      var items = [toggle].concat([].slice.call(drawer.querySelectorAll(F)));
+      var i = items.indexOf(d.activeElement), last = items.length - 1;
+      if (e.shiftKey && i <= 0) { e.preventDefault(); items[last].focus(); }
+      else if (!e.shiftKey && i === last) { e.preventDefault(); items[0].focus(); }
+    });
+    matchMedia('(min-width: 1024px)').addEventListener('change', function (mq) { if (mq.matches && open) setOpen(false); });
   }
 
-  /* ── Mobile menu toggle ─────────────────────────────────────────────────── */
-  const hamburger = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-    });
-
-    /* Close mobile menu when a link inside it is clicked */
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'Open menu');
+  /* Reveal on scroll — CSS only applies when html.js and motion is allowed */
+  var els = d.querySelectorAll('.reveal, .ifl--reveal');
+  if (els.length && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
       });
-    });
-
-    /* Close mobile menu on Escape key */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'Open menu');
-        hamburger.focus();
-      }
-    });
-  }
-
-  /* ── Fade-in on scroll (IntersectionObserver) ───────────────────────────── */
-  const fadeEls = document.querySelectorAll('.fade-in');
-
-  if (fadeEls.length > 0 && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target); /* Animate once only */
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px',
-      }
-    );
-
-    fadeEls.forEach(el => observer.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (el) { io.observe(el); });
   } else {
-    /* Fallback: show all elements if IntersectionObserver not supported */
-    fadeEls.forEach(el => el.classList.add('visible'));
+    els.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ── Footer year ────────────────────────────────────────────────────────── */
-  const yearEl = document.getElementById('footer-year');
-  if (yearEl) {
-    yearEl.textContent = String(new Date().getFullYear());
-  }
-
+  /* Footer year */
+  var y = d.getElementById('footer-year');
+  if (y) y.textContent = String(new Date().getFullYear());
 })();
