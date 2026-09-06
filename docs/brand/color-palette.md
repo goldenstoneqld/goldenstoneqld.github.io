@@ -42,7 +42,8 @@ The v2 palette is not the clichéd "builder-gold" — it avoids saturated or met
 |------|-----|-----|-------|
 | Warm Cream | `#F5F0E8` | rgb(245,240,232) | Page background — cream with a whisper of gold undertone |
 | Surface | `#EDE7DA` | rgb(237,231,218) | Card backgrounds, alternating rows |
-| Stone Grey | `#9E9790` | rgb(158,151,144) | Secondary text, sub-labels, dividers |
+| Stone Grey | `#9E9790` | rgb(158,151,144) | Dividers and decoration on light grounds; muted text on dark grounds only (2.54:1 on cream — fails for text) |
+| Text Muted | `#6E675E` | rgb(110,103,94) | Muted text, labels and hints on light grounds (4.92:1 on cream) |
 | Border | `#D8D0C0` | rgb(216,208,192) | Input borders, dividers — warm, not clinical |
 | Text Dark | `#111111` | rgb(17,17,17) | Primary body text |
 | Text Secondary | `#5C5650` | rgb(92,86,80) | Captions, muted copy |
@@ -78,7 +79,12 @@ On dark (inverted) layouts: Deep Black dominates (~60%), Gold accents (~10–15%
 | Brass Gold `#B8922A` on Deep Black `#111111` | 7.2:1 | AAA |
 | Champagne `#C9A84C` on Deep Black `#111111` | 9.2:1 | AAA |
 | Warm Cream `#F5F0E8` on Deep Black `#111111` | 17.1:1 | AAA |
-| Stone Grey `#9E9790` on Warm Cream `#F5F0E8` | 3.5:1 | AA Large only — use for labels 18px+ only |
+| Stone Grey `#9E9790` on Warm Cream `#F5F0E8` | 2.54:1 | **Fails** — decoration only on light grounds; never text |
+| Brass Gold `#B8922A` on Warm Cream `#F5F0E8` | 2.58:1 | **Fails** — gold is a dark-background colour; on cream use it for rules and marks, never text |
+| Dark Gold `#7A5F1A` on Warm Cream `#F5F0E8` | 5.32:1 | AA — the gold that may carry text on cream (links, eyebrows, tags) |
+| Text Secondary `#5C5650` on Warm Cream `#F5F0E8` | 6.38:1 | AA |
+| Text Muted `#6E675E` on Warm Cream `#F5F0E8` | 4.92:1 | AA — replaces Stone Grey for muted text on light grounds (Sept 2026) |
+| Brass Gold `#B8922A` on Surface Dark `#1C1A18` | 5.93:1 | AA |
 
 ---
 

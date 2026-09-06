@@ -1,6 +1,7 @@
 /* ==========================================================================
    Golden Stone QLD — Design Tokens
-   Source: docs/brand/brand-book.md v2.0
+   Source: docs/brand/brand-book.md v2.0 (palette, type) and the 2026
+   redesign brief (mono figures, contrast corrections, hero animation).
    Australian English comments throughout.
 
    Import order:
@@ -8,47 +9,63 @@
      2. reset.css
      3. base.css
      4. components.css
+     5. components/hero-animation.css (home only)
+     6. pages/<page>.css
+
+   Rule: every colour, space, radius and duration used anywhere on the site
+   is declared here. No literal hex values outside this file.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    Google Fonts
    Barlow Semi Condensed — display / headings (600, 700)
    DM Sans              — body / UI copy (400, 500)
+   The monospace stack is system-only: no extra webfont for figures.
    -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+/* The Google Fonts stylesheet is linked from each page's <head> (with
+   preconnect) so it downloads in parallel with this file rather than after it. */
 
 
 :root {
 
   /* =========================================================================
-     COLOUR PALETTE
-     Brand Book v2.0 — Gold + Black
+     COLOUR PALETTE — Brand Book v2.0, Gold + Black
      ========================================================================= */
 
   /* --- Primary brand colours --- */
-  --colour-gold:          #B8922A; /* Brass Gold — main brand colour; bar mark, CTAs, accents  */
-  --colour-gold-dark:     #7A5F1A; /* Dark Gold — slab right-face shadow, pressed states       */
-  --colour-gold-light:    #C9A84C; /* Champagne — highlight accent, small-scale gold use       */
-  --colour-black:         #111111; /* Deep Black — anchor colour, slab front-face, dark bg     */
+  --colour-gold:          #B8922A; /* Brass Gold — brand mark, rules, CTAs, text ON DARK only     */
+  --colour-gold-dark:     #7A5F1A; /* Dark Gold — slab shadow, pressed states, gold TEXT ON LIGHT */
+  --colour-gold-light:    #C9A84C; /* Champagne — small-scale highlight on dark surfaces           */
+  --colour-black:         #111111; /* Deep Black — anchor colour, dark sections, body text         */
 
   /* --- Neutral palette --- */
-  --colour-bg:            #F5F0E8; /* Warm Cream — page background (warm, not clinical white)  */
-  --colour-surface:       #EDE7DA; /* Surface — cards, alternating table rows                  */
-  --colour-border:        #D8D0C0; /* Border — dividers, input outlines                        */
-  --colour-stone:         #9E9790; /* Stone Grey — sub-labels, secondary/muted text            */
-  --colour-text:          #111111; /* Primary text — same as anchor; warm near-black           */
-  --colour-text-sec:      #5C5650; /* Secondary text — captions, supporting copy               */
-  --colour-text-muted:    #9E9790; /* Muted text — placeholder, disabled states               */
+  --colour-bg:            #F5F0E8; /* Warm Cream — page background                                */
+  --colour-surface:       #EDE7DA; /* Surface — alternating sections, tiles                       */
+  --colour-border:        #D8D0C0; /* Border — hairlines, input outlines                          */
+  --colour-stone:         #9E9790; /* Stone Grey — DECORATION on light; muted text on dark only   */
+  --colour-text:          #111111; /* Primary text on light                                       */
+  --colour-text-sec:      #5C5650; /* Secondary text on light — captions, supporting copy (6.4:1) */
+  --colour-text-muted:    #6E675E; /* Muted text on light — labels, hints (4.9:1 on cream)        */
   --colour-white:         #FFFFFF;
+
+  /* --- Text on dark surfaces --- */
+  --colour-on-dark:       #F5F0E8;                    /* Headings, body on black                */
+  --colour-on-dark-sec:   rgba(245, 240, 232, 0.72);  /* Supporting copy on black               */
+  --colour-on-dark-muted: rgba(245, 240, 232, 0.55);  /* Labels, captions on black (≥ 5:1)      */
+  --colour-line-on-dark:  rgba(245, 240, 232, 0.12);  /* Hairlines on black                     */
+  --colour-line-on-dark-strong: rgba(245, 240, 232, 0.24);
 
   /* --- Supporting gold tones (derived from primary) --- */
   --colour-gold-wash:     rgba(184, 146, 42, 0.10); /* Subtle gold tint — hover backgrounds    */
-  --colour-gold-glow:     rgba(184, 146, 42, 0.30); /* Focus ring, gold highlight              */
+  --colour-gold-glow:     rgba(184, 146, 42, 0.30); /* Focus ring on dark, gold highlight      */
   --colour-gold-border:   rgba(184, 146, 42, 0.25); /* Subtle gold border on dark surfaces     */
+  --colour-gold-line:     rgba(184, 146, 42, 0.55); /* IFL rail minor ticks                    */
 
   /* --- Dark surface variants --- */
   --colour-surface-dark:  #1C1A18; /* Dark card / section background                          */
-  --colour-overlay:       rgba(17, 17, 17, 0.65); /* Photo overlays, modal backdrops           */
+  --colour-overlay:       rgba(17, 17, 17, 0.65);   /* Photo overlays, drawer backdrop         */
+  --colour-overlay-soft:  rgba(17, 17, 17, 0.00);   /* Gradient start for photo captions       */
+  --colour-overlay-deep:  rgba(17, 17, 17, 0.82);   /* Gradient end for photo captions         */
 
   /* --- Semantic colours --- */
   --colour-success:       #2A7A4A;
@@ -59,6 +76,18 @@
   --colour-error-bg:      rgba(184, 58, 42, 0.10);
   --colour-info:          #2A5A8A;
   --colour-info-bg:       rgba(42, 90, 138, 0.10);
+
+  /* --- Focus ring colour: dark gold on light (5.3:1), brass gold on dark --- */
+  --colour-focus:         var(--colour-gold-dark);
+
+  /* --- Hero animation materials (retheme surface for components/hero-animation.css) --- */
+  --hero-grid:            rgba(245, 240, 232, 0.06); /* setting-out grid on black              */
+  --hero-dim-line:        rgba(245, 240, 232, 0.38); /* dimension leaders                      */
+  --hero-dim-text:        rgba(245, 240, 232, 0.72); /* dimension figures                      */
+  --hero-label:           rgba(245, 240, 232, 0.45); /* small labels                           */
+  --hero-accent-wash:     rgba(184, 146, 42, 0.06);  /* plan fill                              */
+  --hero-stone-face:      #EFECE6;                   /* rendered benchtop surface               */
+  --hero-stone-edge:      #B9BDB7;                   /* rendered 20 mm edge                     */
 
   /* --- CSS aliases (American English spelling) for component compatibility --- */
   --color-gold:           var(--colour-gold);
@@ -95,11 +124,12 @@
   /* --- Font families --- */
   --font-display: 'Barlow Semi Condensed', 'Arial Narrow', Arial, sans-serif;
   --font-body:    'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  /* Mono is reserved for figures that describe physical reality or process
+     state: step numbers, millimetre dimensions, the ABN, the phone number,
+     stat units. Nowhere else. */
 
-  /* --- Type scale — Major Third (×1.25), base 16px ---
-     Use display font (Barlow Semi Condensed) for text-xl and above.
-     Use body font (DM Sans) for text-base and below.
-  --- */
+  /* --- Type scale — Major Third (×1.25), base 16px --- */
   --text-xs:    0.75rem;   /*  12px — captions, fine print, badges      */
   --text-sm:    0.875rem;  /*  14px — small UI text, helper labels       */
   --text-base:  1rem;      /*  16px — body copy (minimum for readability)*/
@@ -109,6 +139,7 @@
   --text-3xl:   2.125rem;  /*  34px — h2                                 */
   --text-4xl:   2.625rem;  /*  42px — h1                                 */
   --text-hero:  3.25rem;   /*  52px — display / hero headings            */
+  --text-giant: 4.5rem;    /*  72px — stat figures, hero H1 on desktop   */
 
   /* --- Font weights --- */
   --font-regular:  400;
@@ -117,9 +148,10 @@
   --font-bold:     700;
 
   /* --- Line heights --- */
-  --leading-tight:   1.15;  /* Hero / display headings                   */
-  --leading-snug:    1.25;  /* H1, H2                                    */
-  --leading-normal:  1.4;   /* H3, H4                                    */
+  --leading-none:    1;
+  --leading-tight:   1.05;  /* Hero / display headings                   */
+  --leading-snug:    1.2;   /* H1, H2                                    */
+  --leading-normal:  1.35;  /* H3, H4                                    */
   --leading-relaxed: 1.6;   /* Body copy (optimal for DM Sans)           */
   --leading-loose:   1.75;  /* Long-form / article content               */
 
@@ -128,30 +160,36 @@
   --tracking-normal:  0em;
   --tracking-wide:    0.05em; /* All-caps labels                         */
   --tracking-wider:   0.08em; /* Sub-labels, tags, fine print            */
+  --tracking-widest:  0.14em; /* Mono eyebrows                           */
 
 
   /* =========================================================================
-     SPACING — 8pt Grid
+     SPACING — 8pt grid (4pt half-steps where a component needs them)
      ========================================================================= */
 
   --space-1:   0.25rem;  /*   4px */
   --space-2:   0.5rem;   /*   8px */
   --space-3:   0.75rem;  /*  12px */
   --space-4:   1rem;     /*  16px */
+  --space-5:   1.25rem;  /*  20px */
   --space-6:   1.5rem;   /*  24px */
   --space-8:   2rem;     /*  32px */
+  --space-10:  2.5rem;   /*  40px */
   --space-12:  3rem;     /*  48px */
   --space-16:  4rem;     /*  64px */
+  --space-20:  5rem;     /*  80px */
   --space-24:  6rem;     /*  96px */
+  --space-32:  8rem;     /* 128px */
 
 
   /* =========================================================================
-     BORDER RADII
+     BORDER RADII — stone is not rounded. Large surfaces are square.
      ========================================================================= */
 
-  --radius-sm:   3px;    /* Subtle rounding — chips, badges, code blocks  */
-  --radius-md:   6px;    /* Buttons, inputs, small cards                  */
-  --radius-lg:   12px;   /* Cards, panels, modals                         */
+  --radius-none: 0;
+  --radius-sm:   2px;    /* Buttons, chips, inputs                        */
+  --radius-md:   4px;    /* Small tiles                                   */
+  --radius-lg:   6px;    /* Reserved — modals only                        */
   --radius-full: 9999px; /* Pills, circular avatars                       */
 
 
@@ -159,57 +197,46 @@
      SHADOWS — subtle, premium feel; no harsh drops
      ========================================================================= */
 
-  --shadow-xs:   0 1px 2px  rgba(17, 17, 17, 0.06);  /* Hairline lift    */
-  --shadow-sm:   0 2px 6px  rgba(17, 17, 17, 0.08);  /* Cards at rest    */
-  --shadow-md:   0 4px 16px rgba(17, 17, 17, 0.10);  /* Cards on hover   */
-  --shadow-lg:   0 8px 32px rgba(17, 17, 17, 0.12);  /* Dropdowns, popovers */
-  --shadow-xl:   0 16px 48px rgba(17, 17, 17, 0.14); /* Modals, drawers  */
+  --shadow-xs:   0 1px 2px  rgba(17, 17, 17, 0.06);
+  --shadow-sm:   0 2px 6px  rgba(17, 17, 17, 0.08);
+  --shadow-md:   0 4px 16px rgba(17, 17, 17, 0.10);
+  --shadow-lg:   0 8px 32px rgba(17, 17, 17, 0.12);
+  --shadow-xl:   0 16px 48px rgba(17, 17, 17, 0.14);
+  --shadow-scene: 0 30px 40px rgba(0, 0, 0, 0.45);   /* Hero benchtop drop shadow */
 
-  /* Focus ring — gold glow; replaces default browser outline */
+  /* Focus ring */
   --shadow-focus: 0 0 0 3px var(--colour-gold-glow);
+  --shadow-gold:  0 0 0 3px var(--colour-gold-glow);
 
-  /* Inset — for form inputs (subtle depth on background) */
+  /* Inset — for form inputs */
   --shadow-inset: inset 0 1px 3px rgba(17, 17, 17, 0.07);
-
-  /* Gold focus ring — form inputs and interactive elements */
-  --shadow-gold: 0 0 0 3px var(--colour-gold-glow);
 
 
   /* =========================================================================
      BREAKPOINTS (reference values — documentation only)
 
-     CSS custom properties cannot be used directly inside @media queries.
-     Use these values as a reference when writing media queries:
-
-       @media (min-width: 640px)  { … }   --bp-sm
-       @media (min-width: 768px)  { … }   --bp-md
-       @media (min-width: 1024px) { … }   --bp-lg
-       @media (min-width: 1280px) { … }   --bp-xl
+       @media (min-width: 640px)  { … }   sm
+       @media (min-width: 768px)  { … }   md
+       @media (min-width: 1024px) { … }   lg
+       @media (min-width: 1280px) { … }   xl
 
      All breakpoints follow a mobile-first approach.
      ========================================================================= */
-
-  /* --bp-sm:   640px;  */
-  /* --bp-md:   768px;  */
-  /* --bp-lg:   1024px; */
-  /* --bp-xl:   1280px; */
 
 
   /* =========================================================================
      TRANSITIONS & TIMINGS
      ========================================================================= */
 
-  /* --- Durations --- */
-  --duration-fast:   150ms;  /* Micro-interactions: icon swaps, checkboxes  */
-  --duration-base:   250ms;  /* Standard: hover states, colour changes       */
-  --duration-slow:   400ms;  /* Entrances: modals, drawers, page transitions */
+  --duration-fast:   150ms;
+  --duration-base:   250ms;
+  --duration-slow:   400ms;
+  --duration-reveal: 700ms;  /* Scroll reveals, rail draw                  */
 
-  /* --- Easing curves --- */
-  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);   /* Natural deceleration — entrances */
-  --ease-in:     cubic-bezier(0.4, 0, 1, 1);      /* Acceleration — exits             */
-  --ease-inout:  cubic-bezier(0.45, 0, 0.55, 1);  /* Balanced — toggles, slides       */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-inout:  cubic-bezier(0.45, 0, 0.55, 1);
 
-  /* --- Shorthand transitions (most common combinations) --- */
   --transition-colour:
     color            var(--duration-base) var(--ease-out),
     background-color var(--duration-base) var(--ease-out),
@@ -234,11 +261,17 @@
      ========================================================================= */
 
   --container-max:    1280px; /* Full-width content cap                     */
-  --container-prose:  72ch;   /* Optimal reading width for body copy        */
+  --container-wide:   1440px; /* Photo grids, full-bleed captions           */
+  --container-prose:  68ch;   /* Optimal reading width for body copy        */
   --container-narrow: 640px;  /* Narrow forms, centred content blocks       */
 
   --gutter-sm:  var(--space-4);  /* 16px — mobile horizontal padding        */
   --gutter-md:  var(--space-6);  /* 24px — tablet horizontal padding        */
   --gutter-lg:  var(--space-8);  /* 32px — desktop horizontal padding       */
 
+  --header-h:   72px;            /* Site header height                      */
+
+  /* IFL rail geometry */
+  --rail-node:  10px;            /* Node square                             */
+  --rail-tick:  6px;             /* Minor tick height                       */
 }

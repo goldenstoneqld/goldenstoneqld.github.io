@@ -1,0 +1,209 @@
+/* ==========================================================================
+   Golden Stone — "Plan → 3D → Stone" hero animation
+   Ported from the IFL login entrance (IFL static/css/app.css §"Login hero").
+   Pure SVG + CSS. No JS, no video, no dependencies.
+
+   Retheming: every colour is a custom property with a Golden Stone default.
+   Override on .hero-scene (or :root) to restyle without touching this file.
+
+   Loop (10 s):  0–22 % draw the plan · 22–36 % lift to 3D
+                 36–60 % stone materialises · 60–90 % hold · 90–100 % fold back
+   Accessibility: honours prefers-reduced-motion (shows the finished bench).
+   ========================================================================== */
+
+.hero-scene {
+  /* --- Retheme surface ---------------------------------------------------
+     Every colour comes from tokens.css (the --hero-* block). Override the
+     tokens, not this file, to restheme. ------------------------------------ */
+  --hero-loop:        10s;
+  --hero-accent:      var(--colour-gold);              /* draw lines, scan bar   */
+  --hero-font-mono:   var(--font-mono);
+
+  position: relative;
+  width: min(100%, 520px);
+  perspective: 900px;
+  perspective-origin: 50% 30%;
+}
+
+.hero-stage {
+  transform-style: preserve-3d;
+  transform-origin: 50% 60%;
+  animation: hero-stage var(--hero-loop) cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.hero-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(var(--shadow-scene));
+}
+
+.hero-grid path {
+  fill: none;
+  stroke: var(--hero-grid);
+  stroke-width: 0.8;
+  animation: hero-grid var(--hero-loop) linear infinite;
+}
+
+.hero-plan { animation: hero-plan var(--hero-loop) linear infinite; }
+
+.hero-outline,
+.hero-cutout {
+  fill: var(--hero-accent-wash);
+  stroke: var(--hero-accent);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: hero-draw var(--hero-loop) linear infinite;
+}
+
+.hero-cutout {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation-name: hero-draw-cutout;
+}
+
+.hero-dims { animation: hero-dims var(--hero-loop) linear infinite; }
+.hero-dims path { fill: none; stroke: var(--hero-dim-line); stroke-width: 0.8; }
+.hero-dims text {
+  fill: var(--hero-dim-text);
+  font-family: var(--hero-font-mono);
+  font-size: 10px;
+}
+.hero-dims .hero-label {
+  fill: var(--hero-label);
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+}
+
+.hero-real { animation: hero-real var(--hero-loop) linear infinite; }
+.hero-thickness { fill: var(--hero-stone-edge); }
+.hero-stone {
+  fill: var(--hero-stone-face);
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 0.6;
+}
+.hero-stone-texture { opacity: 0.85; mix-blend-mode: multiply; }
+.hero-sheen { animation: hero-sheen var(--hero-loop) linear infinite; }
+
+.hero-scan {
+  fill: var(--hero-accent);
+  opacity: 0;
+  filter: drop-shadow(0 0 6px var(--hero-accent));
+  animation: hero-scan var(--hero-loop) linear infinite;
+}
+
+/* --- Step read-out under the scene --------------------------------------- */
+.hero-hud {
+  position: relative;
+  height: 20px;
+  margin-top: 1rem;
+  font-family: var(--hero-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hero-label);
+}
+
+.hero-step {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  animation: hero-step var(--hero-loop) linear infinite;
+}
+
+.hero-step b {
+  color: var(--hero-accent);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.hero-step-2 { animation-delay: calc(var(--hero-loop) * 0.33); }
+.hero-step-3 { animation-delay: calc(var(--hero-loop) * 0.63); }
+
+/* --- Timeline ------------------------------------------------------------ */
+@keyframes hero-stage {
+  0%, 22%   { transform: rotateX(0deg)  rotateZ(0deg)   translateY(0);      }
+  36%, 90%  { transform: rotateX(52deg) rotateZ(-14deg) translateY(-10px);  }
+  100%      { transform: rotateX(0deg)  rotateZ(0deg)   translateY(0);      }
+}
+
+@keyframes hero-draw {
+  0%        { stroke-dashoffset: 1400; }
+  14%, 100% { stroke-dashoffset: 0;    }
+}
+
+@keyframes hero-draw-cutout {
+  0%, 10%   { stroke-dashoffset: 400; }
+  20%, 100% { stroke-dashoffset: 0;   }
+}
+
+@keyframes hero-dims {
+  0%, 12%   { opacity: 0; }
+  20%, 34%  { opacity: 1; }
+  44%, 88%  { opacity: 0; }
+  96%, 100% { opacity: 0; }
+}
+
+@keyframes hero-plan {
+  0%, 40%   { opacity: 1; }
+  58%, 86%  { opacity: 0; }
+  94%, 100% { opacity: 1; }
+}
+
+@keyframes hero-real {
+  0%, 38%   { opacity: 0; }
+  56%, 88%  { opacity: 1; }
+  96%, 100% { opacity: 0; }
+}
+
+@keyframes hero-grid {
+  0%, 30%   { opacity: 1;    }
+  50%, 88%  { opacity: 0.25; }
+  96%, 100% { opacity: 1;    }
+}
+
+@keyframes hero-sheen {
+  0%, 44%   { transform: translateX(0);     }
+  60%, 100% { transform: translateX(720px); }
+}
+
+@keyframes hero-scan {
+  0%        { transform: translateY(0);   opacity: 0.9; }
+  12%       { transform: translateY(300px); opacity: 0.9; }
+  13%, 39%  { opacity: 0; transform: translateY(0); }
+  40%       { opacity: 0.9; }
+  52%       { transform: translateY(300px); opacity: 0.9; }
+  53%, 100% { opacity: 0; transform: translateY(0); }
+}
+
+@keyframes hero-step {
+  0%, 2%    { opacity: 0; transform: translateY(4px);  }
+  6%, 28%   { opacity: 1; transform: translateY(0);    }
+  32%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+
+/* --- Reduced motion: show the finished benchtop, no movement -------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage,
+  .hero-grid path,
+  .hero-plan,
+  .hero-outline,
+  .hero-cutout,
+  .hero-dims,
+  .hero-real,
+  .hero-sheen,
+  .hero-scan,
+  .hero-step {
+    animation: none !important;
+  }
+
+  .hero-stage   { transform: rotateX(52deg) rotateZ(-14deg); }
+  .hero-plan    { opacity: 0; }
+  .hero-real    { opacity: 1; }
+  .hero-scan    { opacity: 0; }
+  .hero-step-3  { opacity: 1; }
+}

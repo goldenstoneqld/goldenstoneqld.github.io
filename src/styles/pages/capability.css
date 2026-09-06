@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Golden Stone QLD — Capability Statement page
+   A document a builder can read on a phone or send to a client.
+   Screen layout + an A4 print stylesheet. Australian English comments.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Document header
+   -------------------------------------------------------------------------- */
+.doc-hero { padding-top: var(--space-10); }
+.doc-hero__grid { display: grid; gap: var(--space-10); align-items: start; }
+@media (min-width: 1024px) {
+  .doc-hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-20); }
+}
+.doc-hero__title {
+  font-size: clamp(var(--text-4xl), 6vw, var(--text-giant));
+  margin-bottom: var(--space-6);
+}
+.doc-hero__actions { margin-top: var(--space-8); }
+.doc-hero__meta { justify-self: start; }
+@media (min-width: 640px) { .doc-hero__meta { grid-template-columns: 1fr 1fr; gap: var(--space-5) var(--space-8); } }
+
+
+.js-only { display: none; }
+.js .js-only { display: inline-flex; }
+
+/* --------------------------------------------------------------------------
+   Document body with a contents rail
+   -------------------------------------------------------------------------- */
+.doc { display: grid; gap: var(--space-12); padding-block: var(--space-12) var(--space-24); }
+@media (min-width: 1024px) {
+  .doc { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--space-20); padding-top: var(--space-16); }
+}
+
+.doc__toc { align-self: start; }
+@media (min-width: 1024px) { .doc__toc { position: sticky; top: calc(var(--header-h) + var(--space-8)); } }
+.doc__toc-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--colour-text-muted);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--colour-border);
+}
+.doc__toc ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.doc__toc li { margin: 0; }
+.doc__toc a {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--colour-text-sec);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.doc__toc a span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--colour-gold-dark); letter-spacing: var(--tracking-wider); padding-top: 2px; }
+.doc__toc a:hover { color: var(--colour-text); }
+@media (max-width: 1023px) {
+  .doc__toc ol { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-6); }
+}
+
+.doc__body { min-width: 0; }
+
+.doc__section {
+  padding-block: var(--space-12);
+  border-top: 1px solid var(--colour-border);
+}
+.doc__section:first-child { border-top: 0; padding-top: 0; }
+@media (min-width: 1024px) { .doc__section { padding-block: var(--space-16); } }
+
+/* Dark document sections carry their own ground and bleed into the gutters */
+.doc__section--dark {
+  border-top: 0;
+  padding-inline: var(--gutter-sm);
+  margin-inline: calc(var(--gutter-sm) * -1);
+}
+@media (min-width: 768px)  { .doc__section--dark { padding-inline: var(--gutter-md); margin-inline: calc(var(--gutter-md) * -1); } }
+@media (min-width: 1024px) { .doc__section--dark { padding-inline: var(--space-12); margin-inline: 0; } }
+.doc__section--dark + .doc__section { border-top: 0; }
+
+.doc__num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--colour-gold-dark);
+  margin-bottom: var(--space-4);
+}
+.doc__section--dark .doc__num { color: var(--colour-gold); }
+
+.doc__title { font-size: var(--text-3xl); margin-bottom: var(--space-6); }
+@media (min-width: 1024px) { .doc__title { font-size: var(--text-4xl); } }
+.doc__sub { font-size: var(--text-xl); margin: var(--space-12) 0 var(--space-6); }
+.doc__section .lead { margin-bottom: var(--space-6); }
+.doc__section p { color: var(--colour-text-sec); }
+.doc__section p.lead { color: var(--colour-text-sec); }
+.doc__section--dark p { color: var(--colour-on-dark-sec); }
+.doc__section .schedule { margin-top: var(--space-4); }
+.doc__section .stats { margin-top: var(--space-4); }
+.doc__section .strap { margin-top: var(--space-12); font-size: var(--text-2xl); }
+.doc__section .steps3 { margin-top: var(--space-4); }
+.doc__section .suppliers { margin-top: var(--space-4); }
+.doc__section .points { margin-top: var(--space-4); }
+.doc__section .address { margin-top: 0; margin-bottom: var(--space-8); }
+
+.doc__figure { margin-top: var(--space-10); }
+.doc__equipment { margin-top: var(--space-4); }
+
+.doc__projects { display: grid; gap: var(--space-8); margin-top: var(--space-6); }
+@media (min-width: 640px) { .doc__projects { grid-template-columns: 1fr 1fr; gap: var(--space-10) var(--space-8); } }
+
+.doc__people { display: grid; gap: var(--space-8); margin-top: var(--space-6); }
+@media (min-width: 768px) { .doc__people { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-12); align-items: start; } }
+.doc__team .doc__sub:first-child { margin-top: 0; }
+.doc__team .person { margin-bottom: var(--space-8); }
+
+.doc__cta-actions { margin-top: var(--space-10); }
+
+/* Rail on the document page: single rail of ten on wide screens */
+@media (min-width: 1280px) {
+  .ifl--doc { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* ==========================================================================
+   PRINT — A4, white ground, black text, no chrome, URLs after links
+   ========================================================================== */
+@media print {
+  @page { size: A4; margin: 16mm 14mm; }
+
+  html, body { background: var(--colour-white) !important; color: var(--colour-black) !important; font-size: 10.5pt; }
+
+  .site-header, .nav-drawer, .footer, .whatsapp-fab, .skip-link, .doc__toc,
+  .doc-hero__actions, .doc__cta-actions, .breadcrumb { display: none !important; }
+
+  .page-offset { padding-top: 0 !important; }
+
+  /* Dark sections print white */
+  .doc-hero, .doc__section--dark, .section--dark, .section--dark-surface {
+    background: var(--colour-white) !important;
+    color: var(--colour-black) !important;
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
+  }
+  .doc-hero { padding: 0 0 8mm !important; border-bottom: 2px solid var(--colour-gold); margin-bottom: 8mm; }
+  .doc-hero h1, .doc-hero p, .doc-hero dd, .doc__section--dark h2, .doc__section--dark h3, .doc__section--dark p,
+  .doc__section--dark li, .doc__section--dark dd, .doc__section--dark .ifl__name, .doc__section--dark .strap,
+  .doc__section--dark .contact-block dd, .doc-hero .contact-block dd { color: var(--colour-black) !important; }
+  .doc__section--dark .ifl__desc, .doc__section--dark .checklist li { color: var(--colour-text-sec) !important; }
+  .doc__section--dark .eyebrow, .doc__section--dark .doc__num, .doc__section--dark .ifl__num, .doc-hero .eyebrow,
+  .doc__section--dark dt, .doc-hero dt { color: var(--colour-gold-dark) !important; }
+  .ifl { --ifl-node-bg: var(--colour-white); }
+
+  .doc { display: block; padding: 0; }
+  .doc__section { padding: 6mm 0; border-top: 1px solid var(--colour-border); break-inside: auto; }
+  .doc__section:first-child { padding-top: 0; }
+  /* New page for the major sections */
+  #lifecycle, #projects { break-before: page; }
+  #at-a-glance, #typical-scope, #suppliers, #why { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  figure, .equip, .project, .stat, .person, .ifl__step { break-inside: avoid; }
+
+  .doc__title { font-size: 20pt; }
+  .doc__sub { font-size: 12.5pt; }
+  .lead { font-size: 11.5pt; }
+  .strap { font-size: 15pt !important; }
+
+  /* Rail prints as two rows of five with the hairline */
+  .ifl { grid-template-columns: repeat(5, minmax(0, 1fr)); row-gap: 8mm; }
+  .ifl__step { padding: 6mm 4mm 0 0; }
+  .ifl__step::before { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: var(--rail-tick);
+    background: linear-gradient(var(--colour-gold), var(--colour-gold)) 0 100% / 100% 1px no-repeat; }
+  .ifl__step::after { top: calc(var(--rail-tick) - var(--rail-node) / 2); left: 0; }
+  .ifl__name { font-size: 13pt; }
+  .ifl__desc { font-size: 9pt; }
+
+  /* Photographs: keep, but not full width */
+  .frame { background: none; }
+  .doc__figure .frame--panel { aspect-ratio: auto; height: 78mm; width: 104mm; }
+  .doc__figure .frame--wide  { aspect-ratio: auto; height: 70mm; }
+  .doc__figure img { object-fit: cover; }
+  .doc__projects { grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .doc__equipment { grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .equip { border: 1px solid var(--colour-border); }
+  .suppliers { grid-template-columns: repeat(5, 1fr); gap: 3mm; }
+  .suppliers__logo { height: 22mm; border: 1px solid var(--colour-border); }
+
+  /* Links: print the URL after external links, not internal ones */
+  a { color: var(--colour-black) !important; text-decoration: none; }
+  a[href^="http"]::after { content: ' (' attr(href) ')'; font-family: var(--font-mono); font-size: 8pt; color: var(--colour-text-sec); }
+  a[href^="mailto:"]::after, a[href^="tel:"]::after { content: none; }
+
+  .stats { grid-template-columns: repeat(4, 1fr); }
+  .stat__figure { font-size: 22pt !important; }
+  .points { grid-template-columns: repeat(2, 1fr); }
+  .points li { font-size: 11pt; }
+  .schedule__row { font-size: 12pt; padding: 3mm 0; }
+  .contact-block--2 { grid-template-columns: 1fr 1fr 1fr; }
+}

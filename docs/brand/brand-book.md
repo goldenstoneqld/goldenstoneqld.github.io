@@ -174,7 +174,8 @@ Full specifications and CSS variables in [`color-palette.md`](./color-palette.md
 |------|-----|-------|
 | Warm Cream | `#F5F0E8` | Page background |
 | Surface | `#EDE7DA` | Cards, alternating rows |
-| Stone Grey | `#9E9790` | Sub-labels, secondary text |
+| Stone Grey | `#9E9790` | Dividers, decoration on light; muted text on dark grounds only |
+| Text Muted | `#6E675E` | Muted text and labels on light grounds (added Sept 2026 — Stone Grey measures 2.54:1 on cream) |
 | Border | `#D8D0C0` | Dividers, input borders |
 | Text Secondary | `#5C5650` | Captions, muted copy |
 
@@ -185,6 +186,8 @@ Full specifications and CSS variables in [`color-palette.md`](./color-palette.md
 | Deep Black on Warm Cream | 17.1:1 | AAA |
 | Brass Gold on Deep Black | 7.2:1 | AAA |
 | Warm Cream on Deep Black | 17.1:1 | AAA |
+| Dark Gold on Warm Cream | 5.3:1 | AA — the only gold permitted as text on cream |
+| Brass Gold on Warm Cream | 2.6:1 | Fails — rules, marks and fills only, never text |
 
 ### CSS Tokens (v2)
 

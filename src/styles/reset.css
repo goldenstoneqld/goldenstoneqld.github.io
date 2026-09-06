@@ -109,7 +109,7 @@ fieldset {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold, #B8922A);
+  outline: 3px solid var(--colour-focus);
   outline-offset: 3px;
   border-radius: 3px;
 }
